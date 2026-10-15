@@ -126,6 +126,8 @@ found:
   p->pid = allocpid();
   p->state = USED;
   p->cputime = 0;
+  p->priority = 0;
+  p->readytime = 0;
 
   // Allocate a trapframe page.
   if ((p->trapframe = (struct trapframe *)kalloc()) == 0) {
@@ -170,7 +172,9 @@ freeproc(struct proc *p)
   p->killed = 0;
   p->xstate = 0;
   p->cputime = 0;
+  p->priority = 0;
   p->state = UNUSED;
+  p->readytime = 0;
 }
 
 // Create a user page table for a given process, with no user memory,
@@ -229,6 +233,7 @@ userinit(void)
   p->cwd = namei("/");
 
   p->state = RUNNABLE;
+  p->readytime = ticks;
 
   release(&p->lock);
 }
@@ -291,6 +296,7 @@ kfork(void)
   np->cwd = idup(p->cwd);
 
   safestrcpy(np->name, p->name, sizeof(p->name));
+  np->priority = p->priority;
 
   pid = np->pid;
 
@@ -302,6 +308,7 @@ kfork(void)
 
   acquire(&np->lock);
   np->state = RUNNABLE;
+  np->readytime = ticks;
   release(&np->lock);
 
   return pid;
@@ -498,6 +505,8 @@ scheduler(void)
     intr_off();
 
     int found = 0;
+
+#if SCHEDULER == SCHED_RR
     for (p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
       if (p->state == RUNNABLE) {
@@ -518,6 +527,40 @@ scheduler(void)
       }
       release(&p->lock);
     }
+#else
+    // Priority-based scheduling
+    struct proc *best = 0;
+    int best_pri = -1;
+
+    for (p = proc; p < &proc[NPROC]; p++) {
+      acquire(&p->lock);
+      if (p->state == RUNNABLE) {//&& p->priority > best_pri
+        //best_pri = p->priority;
+	int eff = p->priority + (ticks - p->readytime);
+	if (eff > MAXEFFPRIORITY)
+	  eff = MAXEFFPRIORITY;
+	if (eff > best_eff) {
+	  best_eff = eff;
+          best = p;
+	}
+        //best = p;
+      }
+      release(&p->lock);
+    }
+
+    if (best) {
+      acquire(&best->lock);
+      if (best->state == RUNNABLE) { // re-check: state could've changed
+        best->state = RUNNING;
+        c->proc = best;
+        swtch(&c->context, &best->context);
+        mycpu()->intena = 0;
+        c->proc = 0;
+        found = 1;
+      }
+      release(&best->lock);
+    }
+#endif
     if (found == 0) {
       // nothing to run; stop running on this core until an interrupt.
       asm volatile("wfi");
@@ -559,6 +602,7 @@ yield(void)
   struct proc *p = myproc();
   acquire(&p->lock);
   p->state = RUNNABLE;
+  p->readytime = ticks;
   sched();
   release(&p->lock);
 }
@@ -628,6 +672,44 @@ sleep(void)
   release(&p->lock);
 }
 
+//I added this for task 1
+// Fill the user-provided array with info about every active process.
+// Returns the number of processes written, or -1 on error.
+int
+kgetprocs(uint64 addr)
+{
+  struct proc *p;
+  struct proc *self = myproc();
+  struct pstat ps;
+  int n = 0;
+
+  acquire(&wait_lock);
+  for (p = proc; p < &proc[NPROC]; p++) {
+    acquire(&p->lock);
+    if (p->state != UNUSED) {
+      ps.pid = p->pid;
+      ps.state = p->state;
+      ps.size = p->sz;
+      ps.priority = p->priority;
+      ps.readytime = p->readytime;
+      ps.cputime = p->cputime;
+      safestrcpy(ps.name, p->name, sizeof(ps.name));
+      ps.ppid = p->parent ? p->parent->pid : 0;
+
+      if (copyout(self->pagetable, self->sz, addr + n * sizeof(ps),
+                  (char *)&ps, sizeof(ps)) < 0) {
+        release(&p->lock);
+        release(&wait_lock);
+        return -1;
+      }
+      n++;
+    }
+    release(&p->lock);
+  }
+  release(&wait_lock);
+  return n;
+}
+
 // Wake up all processes sleeping on channel chan.
 void
 wakeup(void *chan)
@@ -645,6 +727,7 @@ wakeup(void *chan)
       // go to sleep, also set it back to RUNNING.
       if (p->state == SLEEPING) {
         p->state = RUNNABLE;
+	p->readytime = ticks;
       }
     }
     release(&p->lock);
@@ -666,6 +749,7 @@ kkill(int pid)
       if (p->state == SLEEPING) {
         // Wake process from sleep().
         p->state = RUNNABLE;
+	p->readytime = ticks;
       }
       release(&p->lock);
       return 0;

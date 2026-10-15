@@ -76,8 +76,9 @@ struct trapframe {
   /* 280 */ uint64 t6;
 };
 
-enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
+//enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
+#include "pstat.h"
 // Per-process state
 struct proc {
   struct spinlock lock;
@@ -89,6 +90,8 @@ struct proc {
   int xstate;           // Exit status to be returned to parent's wait
   int pid;              // Process ID
   int cputime;          // CPU time used, in ticks
+  int priority;           // task 2 process priority (0-49)
+  uint readytime;         // task 3 tick at which process became RUNNABLE
 
   // wait_lock must be held when using this:
   struct proc *parent; // Parent process

@@ -1,6 +1,7 @@
 #define SBRK_ERROR ((char *)-1)
 
 struct stat;
+struct pstat;
 struct rusage;
 
 // system calls
@@ -27,6 +28,10 @@ int pause(int);
 int uptime(void);
 int sync(void);
 int wait2(int*, struct rusage*);
+//I added this system call (Task 1)
+int getprocs(struct pstat*);
+int getpriority(void);
+int setpriority(int);
 
 // ulib.c
 int stat(const char *, struct stat *);

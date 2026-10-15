@@ -23,6 +23,42 @@ sys_getpid(void)
 }
 
 uint64
+sys_getprocs(void)
+{
+  uint64 addr;
+  argaddr(0, &addr);
+  return kgetprocs(addr);
+}
+
+uint64
+sys_getpriority(void)
+{
+  struct proc *p = myproc();
+  int pri;
+
+  acquire(&p->lock);
+  pri = p->priority;
+  release(&p->lock);
+  return pri;
+}
+
+uint64
+sys_setpriority(void)
+{
+  int n;
+  struct proc *p = myproc();
+
+  argint(0, &n);
+  if (n < 0 || n > 49)
+    return -1;
+
+  acquire(&p->lock);
+  p->priority = n;
+  release(&p->lock);
+  return 0;
+}
+
+uint64
 sys_fork(void)
 {
   return kfork();

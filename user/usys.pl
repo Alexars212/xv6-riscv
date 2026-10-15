@@ -44,3 +44,6 @@ entry("pause");
 entry("uptime");
 entry("sync");
 entry("wait2");
+entry("getprocs");
+entry("getpriority");
+entry("setpriority");
