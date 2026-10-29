@@ -168,6 +168,22 @@ main(void)
       cmd[strlen(cmd) - 1] = 0; // chop \n
       if (chdir(cmd + 3) < 0)
         fprintf(2, "cannot cd %s\n", cmd + 3);
+    } else if (cmd[0] == 's' && cmd[1] == 'e' && cmd[2] == 't' &&
+               cmd[3] == 'p' && cmd[4] == 'r' && cmd[5] == 'i' &&
+               cmd[6] == 'o' && cmd[7] == 'r' && cmd[8] == 'i' &&
+               cmd[9] == 't' && cmd[10] == 'y' && cmd[11] == ' ') {
+	cmd[strlen(cmd) - 1] = 0; // chop \n
+      int pri = atoi(cmd + 12);
+      if (setpriority(pri) < 0)
+        fprintf(2, "setpriority failed\n");
+    } else if (cmd[0] == 'g' && cmd[1] == 'e' && cmd[2] == 't' &&
+               cmd[3] == 'p' && cmd[4] == 'r' && cmd[5] == 'i' &&
+               cmd[6] == 'o' && cmd[7] == 'r' && cmd[8] == 'i' &&
+               cmd[9] == 't' && cmd[10] == 'y' &&
+               (cmd[11] == '\n' || cmd[11] == 0)) {
+      // getpriority must also run in the shell's own process,
+      // so it reports the shell's actual current priority.
+      printf("%d\n", getpriority());
     } else {
       if (fork1() == 0)
         runcmd(parsecmd(cmd));
