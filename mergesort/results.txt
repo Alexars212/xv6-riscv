@@ -1,0 +1,200 @@
+== threads=1 run=1
+Sequential mergesort took: 1.552640 sec.
+Parallel mergesort took: 1.583484 sec.
+Built-in qsort took: 1.701623 sec.
+== threads=1 run=2
+Sequential mergesort took: 1.557276 sec.
+Parallel mergesort took: 1.583950 sec.
+Built-in qsort took: 1.709926 sec.
+== threads=1 run=3
+Sequential mergesort took: 1.555015 sec.
+Parallel mergesort took: 1.585060 sec.
+Built-in qsort took: 1.700639 sec.
+== threads=1 run=4
+Sequential mergesort took: 1.554612 sec.
+Parallel mergesort took: 1.583607 sec.
+Built-in qsort took: 1.702827 sec.
+== threads=1 run=5
+Sequential mergesort took: 1.555670 sec.
+Parallel mergesort took: 1.583733 sec.
+Built-in qsort took: 1.701379 sec.
+== threads=2 run=1
+Sequential mergesort took: 1.595024 sec.
+Parallel mergesort took: 0.837639 sec.
+Built-in qsort took: 1.737735 sec.
+== threads=2 run=2
+Sequential mergesort took: 1.592826 sec.
+Parallel mergesort took: 0.836196 sec.
+Built-in qsort took: 1.732228 sec.
+== threads=2 run=3
+Sequential mergesort took: 1.592941 sec.
+Parallel mergesort took: 0.838676 sec.
+Built-in qsort took: 1.735584 sec.
+== threads=2 run=4
+Sequential mergesort took: 1.596601 sec.
+Parallel mergesort took: 0.837970 sec.
+Built-in qsort took: 1.734645 sec.
+== threads=2 run=5
+Sequential mergesort took: 1.595742 sec.
+Parallel mergesort took: 0.835900 sec.
+Built-in qsort took: 1.735466 sec.
+== threads=4 run=1
+Sequential mergesort took: 1.593884 sec.
+Parallel mergesort took: 0.473293 sec.
+Built-in qsort took: 1.728749 sec.
+== threads=4 run=2
+Sequential mergesort took: 1.593034 sec.
+Parallel mergesort took: 0.473297 sec.
+Built-in qsort took: 1.740633 sec.
+== threads=4 run=3
+Sequential mergesort took: 1.597490 sec.
+Parallel mergesort took: 0.473443 sec.
+Built-in qsort took: 1.736339 sec.
+== threads=4 run=4
+Sequential mergesort took: 1.595682 sec.
+Parallel mergesort took: 0.475233 sec.
+Built-in qsort took: 1.730285 sec.
+== threads=4 run=5
+Sequential mergesort took: 1.596056 sec.
+Parallel mergesort took: 0.473800 sec.
+Built-in qsort took: 1.737059 sec.
+== threads=8 run=1
+Sequential mergesort took: 1.595975 sec.
+Parallel mergesort took: 0.302215 sec.
+Built-in qsort took: 1.732492 sec.
+== threads=8 run=2
+Sequential mergesort took: 1.597388 sec.
+Parallel mergesort took: 0.300532 sec.
+Built-in qsort took: 1.735583 sec.
+== threads=8 run=3
+Sequential mergesort took: 1.593637 sec.
+Parallel mergesort took: 0.302416 sec.
+Built-in qsort took: 1.727723 sec.
+== threads=8 run=4
+Sequential mergesort took: 1.594762 sec.
+Parallel mergesort took: 0.301871 sec.
+Built-in qsort took: 1.735116 sec.
+== threads=8 run=5
+Sequential mergesort took: 1.594778 sec.
+Parallel mergesort took: 0.301830 sec.
+Built-in qsort took: 1.732547 sec.
+== threads=16 run=1
+Sequential mergesort took: 1.592464 sec.
+Parallel mergesort took: 0.288647 sec.
+Built-in qsort took: 1.737178 sec.
+== threads=16 run=2
+Sequential mergesort took: 1.595453 sec.
+Parallel mergesort took: 0.272549 sec.
+Built-in qsort took: 1.728029 sec.
+== threads=16 run=3
+Sequential mergesort took: 1.594422 sec.
+Parallel mergesort took: 0.271538 sec.
+Built-in qsort took: 1.732309 sec.
+== threads=16 run=4
+Sequential mergesort took: 1.595692 sec.
+Parallel mergesort took: 0.276463 sec.
+Built-in qsort took: 1.732372 sec.
+== threads=16 run=5
+Sequential mergesort took: 1.596362 sec.
+Parallel mergesort took: 0.292793 sec.
+Built-in qsort took: 1.733547 sec.
+== threads=1 run=1
+Sequential mergesort took: 1.543476 sec.
+Parallel mergesort took: 1.574548 sec.
+Built-in qsort took: 1.689338 sec.
+== threads=1 run=2
+Sequential mergesort took: 1.542403 sec.
+Parallel mergesort took: 1.575376 sec.
+Built-in qsort took: 1.697928 sec.
+== threads=1 run=3
+Sequential mergesort took: 1.546043 sec.
+Parallel mergesort took: 1.572867 sec.
+Built-in qsort took: 1.698055 sec.
+== threads=1 run=4
+Sequential mergesort took: 1.548123 sec.
+Parallel mergesort took: 1.576283 sec.
+Built-in qsort took: 1.702534 sec.
+== threads=1 run=5
+Sequential mergesort took: 1.550184 sec.
+Parallel mergesort took: 1.578681 sec.
+Built-in qsort took: 1.703042 sec.
+== threads=2 run=1
+Sequential mergesort took: 1.587688 sec.
+Parallel mergesort took: 0.834639 sec.
+Built-in qsort took: 1.732096 sec.
+== threads=2 run=2
+Sequential mergesort took: 1.588596 sec.
+Parallel mergesort took: 0.833076 sec.
+Built-in qsort took: 1.731402 sec.
+== threads=2 run=3
+Sequential mergesort took: 1.588396 sec.
+Parallel mergesort took: 0.832038 sec.
+Built-in qsort took: 1.729640 sec.
+== threads=2 run=4
+Sequential mergesort took: 1.585556 sec.
+Parallel mergesort took: 0.833788 sec.
+Built-in qsort took: 1.735698 sec.
+== threads=2 run=5
+Sequential mergesort took: 1.590329 sec.
+Parallel mergesort took: 0.833236 sec.
+Built-in qsort took: 1.734716 sec.
+== threads=4 run=1
+Sequential mergesort took: 1.592202 sec.
+Parallel mergesort took: 0.472043 sec.
+Built-in qsort took: 1.732219 sec.
+== threads=4 run=2
+Sequential mergesort took: 1.586900 sec.
+Parallel mergesort took: 0.472344 sec.
+Built-in qsort took: 1.730752 sec.
+== threads=4 run=3
+Sequential mergesort took: 1.591221 sec.
+Parallel mergesort took: 0.471726 sec.
+Built-in qsort took: 1.729803 sec.
+== threads=4 run=4
+Sequential mergesort took: 1.592292 sec.
+Parallel mergesort took: 0.471585 sec.
+Built-in qsort took: 1.732930 sec.
+== threads=4 run=5
+Sequential mergesort took: 1.591313 sec.
+Parallel mergesort took: 0.472070 sec.
+Built-in qsort took: 1.726985 sec.
+== threads=8 run=1
+Sequential mergesort took: 1.583481 sec.
+Parallel mergesort took: 0.301102 sec.
+Built-in qsort took: 1.728482 sec.
+== threads=8 run=2
+Sequential mergesort took: 1.590562 sec.
+Parallel mergesort took: 0.301142 sec.
+Built-in qsort took: 1.730851 sec.
+== threads=8 run=3
+Sequential mergesort took: 1.589211 sec.
+Parallel mergesort took: 0.301129 sec.
+Built-in qsort took: 1.729716 sec.
+== threads=8 run=4
+Sequential mergesort took: 1.590301 sec.
+Parallel mergesort took: 0.300510 sec.
+Built-in qsort took: 1.722366 sec.
+== threads=8 run=5
+Sequential mergesort took: 1.560001 sec.
+Parallel mergesort took: 0.299550 sec.
+Built-in qsort took: 1.724300 sec.
+== threads=16 run=1
+Sequential mergesort took: 1.568944 sec.
+Parallel mergesort took: 0.280902 sec.
+Built-in qsort took: 1.726747 sec.
+== threads=16 run=2
+Sequential mergesort took: 1.585619 sec.
+Parallel mergesort took: 0.294874 sec.
+Built-in qsort took: 1.729602 sec.
+== threads=16 run=3
+Sequential mergesort took: 1.590888 sec.
+Parallel mergesort took: 0.294236 sec.
+Built-in qsort took: 1.722344 sec.
+== threads=16 run=4
+Sequential mergesort took: 1.591379 sec.
+Parallel mergesort took: 0.282233 sec.
+Built-in qsort took: 1.727297 sec.
+== threads=16 run=5
+Sequential mergesort took: 1.579157 sec.
+Parallel mergesort took: 0.292907 sec.
+Built-in qsort took: 1.722971 sec.
