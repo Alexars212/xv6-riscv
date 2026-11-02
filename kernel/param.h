@@ -13,9 +13,9 @@
 #define MAXPATH     128               // maximum file path name
 #define USERSTACK   1                 // user stack pages
 //task 4
-#define SCHED_RR   0
-#define SCHED_PRIO 1
-//#define SCHEDULER SCHED_PRIO //task 4
-#define SCHEDULER  SCHED_RR     // change to SCHED_PRIO to use the priority scheduler
 
+#define SCHED_RR       0
+#define SCHED_PRIORITY 1
+#define SCHED_AGING    2
+#define SCHED_POLICY SCHED_AGING
 #define MAXEFFPRIORITY 99

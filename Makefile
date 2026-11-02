@@ -159,6 +159,8 @@ UPROGS=\
 	$U/_pexec\
 	$U/_getpriority\
 	$U/_setpriority\
+	$U/_sched4\
+	$U/_aging4\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

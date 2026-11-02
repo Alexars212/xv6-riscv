@@ -1,3 +1,4 @@
+
 #include "types.h"
 #include "param.h"
 #include "memlayout.h"
@@ -496,61 +497,48 @@ scheduler(void)
 
   c->proc = 0;
   for (;;) {
-    // The most recent process to run may have had interrupts
-    // turned off; enable them to avoid a deadlock if all
-    // processes are waiting. Then turn them back off
-    // to avoid a possible race between an interrupt
-    // and wfi.
     intr_on();
     intr_off();
 
     int found = 0;
 
-#if SCHEDULER == SCHED_RR
+#if SCHED_POLICY == SCHED_RR
     for (p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
       if (p->state == RUNNABLE) {
-        // Switch to chosen process.  It is the process's job
-        // to release its lock and then reacquire it
-        // before jumping back to us.
         p->state = RUNNING;
         c->proc = p;
         swtch(&c->context, &p->context);
-
-        // Don't re-enable interrupts on release.
         mycpu()->intena = 0;
-
-        // Process is done running for now.
-        // It should have changed its p->state before coming back.
         c->proc = 0;
         found = 1;
       }
       release(&p->lock);
     }
 #else
-    // Priority-based scheduling
     struct proc *best = 0;
-    int best_pri = -1;
+    int best_eff = -1;
 
     for (p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
-      if (p->state == RUNNABLE) {//&& p->priority > best_pri
-        //best_pri = p->priority;
-	int eff = p->priority + (ticks - p->readytime);
-	if (eff > MAXEFFPRIORITY)
-	  eff = MAXEFFPRIORITY;
-	if (eff > best_eff) {
-	  best_eff = eff;
+      if (p->state == RUNNABLE) {
+        int eff = p->priority;
+#if SCHED_POLICY == SCHED_AGING
+        eff += ticks - p->readytime;
+        if (eff > MAXEFFPRIORITY)
+          eff = MAXEFFPRIORITY;
+#endif
+        if (eff > best_eff) {
+          best_eff = eff;
           best = p;
-	}
-        //best = p;
+        }
       }
       release(&p->lock);
     }
 
     if (best) {
       acquire(&best->lock);
-      if (best->state == RUNNABLE) { // re-check: state could've changed
+      if (best->state == RUNNABLE) {
         best->state = RUNNING;
         c->proc = best;
         swtch(&c->context, &best->context);
@@ -561,8 +549,8 @@ scheduler(void)
       release(&best->lock);
     }
 #endif
+
     if (found == 0) {
-      // nothing to run; stop running on this core until an interrupt.
       asm volatile("wfi");
     }
   }
