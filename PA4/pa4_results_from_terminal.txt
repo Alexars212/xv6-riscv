@@ -1,0 +1,47 @@
+PA4 RESULTS -- COPIED FROM MY TERMINAL OUTPUT
+(Bridges-2 was out of service when this was prepared, so these are the lines
+copied from my terminal, not the original slurm output files.)
+
+=== Task 1: small sizes and n=32000 (interactive runs) ===
+n=8     p=1 0.000005  p=2 0.000237  p=4 0.000025  p=8 0.000029   y[7]     = 532
+n=32    p=1 0.000004  p=2 0.000026  p=4 0.000018  p=8 0.000109   y[31]    = 41168
+n=1024  p=1 0.001009  p=2 0.000543  p=4 0.000276  p=8 0.000222   y[1023]  = 1429035520
+n=32000 p=1 1.028272  p=2 0.518581  p=4 0.274231  p=8 0.146535   y[31999] = 43688106704000
+
+=== Task 2: sequential timings, job 50356433 (seq_submit), seconds ===
+n=1000   1.007e-3 0.984e-3 0.963e-3
+n=2000   3.926e-3 4.081e-3 3.899e-3
+n=4000   15.616e-3 17.146e-3 16.223e-3
+n=8000   63.554e-3 63.297e-3 67.116e-3
+n=16000  0.258068 0.271175 0.266724
+n=32000  1.056251 1.038262 1.074636
+
+=== Task 4: batch job 50356456 (pa4_job.sh), n=32000, seconds ===
+Running with 1 processes (rep 1)...  time: 1.056403
+Running with 2 processes (rep 1)...  time: 0.538484
+Running with 4 processes (rep 1)...  time: 0.306218
+Running with 8 processes (rep 1)...  time: 0.147547
+Running with 1 processes (rep 2)...  time: 1.054463
+Running with 2 processes (rep 2)...  time: 0.533164
+Running with 4 processes (rep 2)...  time: 0.290312
+Running with 8 processes (rep 2)...  time: 0.149125
+Running with 1 processes (rep 3)...  time: 1.058238
+Running with 2 processes (rep 3)...  time: 0.539319
+Running with 4 processes (rep 3)...  time: 0.291529
+Running with 8 processes (rep 3)...  time: 0.162660
+Checks: 12 lines with y[31999] = 43688106704000.000000; 0 lines with killed/error
+
+=== Extra credit: transpose job 50357181 (transpose_job.sh), n=20000 ===
+RESULT p=1 n=20000 pack=1.573205 comm=0.395272 unpack=0.399627 total=2.368104 errors=0
+RESULT p=2 n=20000 pack=0.586638 comm=0.451294 unpack=0.262116 total=1.300048 errors=0
+RESULT p=4 n=20000 pack=0.260771 comm=0.260476 unpack=0.177487 total=0.698734 errors=0
+RESULT p=8 n=20000 pack=0.213300 comm=0.226811 unpack=0.209026 total=0.649137 errors=0
+RESULT p=1 n=20000 pack=1.536968 comm=0.385009 unpack=0.389206 total=2.311184 errors=0
+RESULT p=2 n=20000 pack=0.602787 comm=0.418442 unpack=0.270530 total=1.291759 errors=0
+RESULT p=4 n=20000 pack=0.265685 comm=0.244717 unpack=0.177217 total=0.687619 errors=0
+RESULT p=8 n=20000 pack=0.207236 comm=0.203810 unpack=0.217177 total=0.628223 errors=0
+RESULT p=1 n=20000 pack=1.563193 comm=0.413431 unpack=0.433860 total=2.410484 errors=0
+RESULT p=2 n=20000 pack=0.571161 comm=0.393531 unpack=0.271199 total=1.235891 errors=0
+RESULT p=4 n=20000 pack=0.277668 comm=0.248539 unpack=0.220908 total=0.747115 errors=0
+RESULT p=8 n=20000 pack=0.194410 comm=0.192219 unpack=0.213954 total=0.600583 errors=0
+Checks: 12 runs with errors=0; 0 lines with killed/error

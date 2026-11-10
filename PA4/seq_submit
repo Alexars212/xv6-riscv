@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH -p RM-shared
+#SBATCH --tasks-per-node=32
+#SBATCH -t 0:30:00
+
+set -x
+cd $SLURM_SUBMIT_DIR
+module load openmpi
+
+for rep in 1 2 3; do
+  for n in 1000 2000 4000 8000 16000 32000; do
+    echo "n=$n rep=$rep"
+    mpirun -n 1 ./mvm $n
+  done
+done
+echo "Job completed"
